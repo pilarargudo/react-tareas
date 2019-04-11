@@ -1,0 +1,22 @@
+.board {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: yellowgreen;
+    main {
+        background: grey;
+        flex:1;
+    }
+    header {
+        background: tomato;
+        padding: 2em;
+        input {
+            all:unset;
+            color: white;
+            font-weight: 500;
+            border-bottom: 1px solid white;
+            padding: 0.5em;
+        }
+    }
+
+}
