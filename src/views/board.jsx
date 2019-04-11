@@ -7,15 +7,7 @@ class Board extends Component {
     newTaskText: '',
 
     tasks: [
-      {
-        text: 'aprender jsx',
-      },
-      {
-        text: 'aprender react',
-      },
-      {
-        text: 'aprender react',
-      },
+
     ],
   };
   addTask = text => {
@@ -42,7 +34,7 @@ class Board extends Component {
       <div className='board'>
         <header>
           <input type='text' placeholder='add task' onKeyUp={this.handleKeyUp}  onChange={this.handleChange} value={this.state.newTaskText} />
-          {this.state.newTaskText}
+
         </header>
         <main className='tasks'>
           {this.state.tasks.map(task => (

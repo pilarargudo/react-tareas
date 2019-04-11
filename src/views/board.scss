@@ -7,6 +7,14 @@
         background: grey;
         flex:1;
     }
+    .tasks {
+        padding: 3em;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
     header {
         background: tomato;
         padding: 2em;
