@@ -4,4 +4,20 @@
     border-radius: 4px;
     margin: 0.4em;
     width: 200px;
+    display: flex;
+    flex-direction: column;
+
+    .hidden {
+        display: none;
+    }
+    input {
+        all:unset;
+        width: 90%;
+        box-sizing: border-box;
+        padding: 0.2em;
+        margin: 0.5em;
+    }
+     input:focus {
+        border-bottom: 1px solid black;
+     }
 }
