@@ -20,6 +20,7 @@ class Board extends Component {
         id: Date.now(),
         createAt: new Date(),
         text,
+        completed: false,
       };
       this.setState({
         tasks: [newTask, ...this.state.tasks],
@@ -39,8 +40,6 @@ class Board extends Component {
     });
   };
 
-
-
   removeTask = id => {
     this.setState({
       tasks: this.state.tasks.filter(task => task.id !== id),
@@ -50,6 +49,7 @@ class Board extends Component {
   handleChange = ev => {
     this.setState({ newTaskText: ev.target.value });
   };
+
   handleKeyUp = ev => {
     if (ev.keyCode === 13) {
       this.addTask(ev.target.value);
