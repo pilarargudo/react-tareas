@@ -6,10 +6,13 @@ class Board extends Component {
   state = {
     newTaskText: '',
 
-    tasks: [
-
-    ],
+      tasks: JSON.parse(localStorage.getItem('tasks')) || [],
   };
+
+  componentDidUpdate() {
+      localStorage.setItem('tasks', JSON.stringify(this.state.tasks))
+  }
+
   addTask = text => {
     let newTask = {
       text,
