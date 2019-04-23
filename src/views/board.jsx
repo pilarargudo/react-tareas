@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import './board.scss';
 import Task from '../components/task.jsx';
 
+// importamos redux
+import { connect } from 'react-redux';
+
+
 class Board extends Component {
   state = {
     newTaskText: '',
-
-    tasks: JSON.parse(localStorage.getItem('tasks')) || [],
+    // las tareas ya no van a llegar de este modo con localstorage
+    //tasks: JSON.parse(localStorage.getItem('tasks')) || [],
   };
 
   componentDidUpdate() {
@@ -22,10 +26,16 @@ class Board extends Component {
         text,
         completed: false,
       };
-      this.setState({
-        tasks: [newTask, ...this.state.tasks],
-        newTaskText: '',
-      });
+      // el estado ya no pasaría por aquí
+      // this.setState({
+      //   tasks: [newTask, ...this.state.tasks],
+      //   newTaskText: ''
+
+      // NOTE reemplazamos state por dispatch
+      // NOTE OPCIÓN A
+      this.props.dispatch({type: 'ADD_TODO', payload: newTask})
+      // NOTE OPCIÓN B
+      //this.props.addTask (text)
     }
   };
 
@@ -46,6 +56,7 @@ class Board extends Component {
     });
   };
 
+  // NOTE estos dos eventos los podemos dejar como estado interno del componente
   handleChange = ev => {
     this.setState({ newTaskText: ev.target.value });
   };
@@ -63,7 +74,7 @@ class Board extends Component {
           <input type='text' placeholder='add task' onKeyUp={this.handleKeyUp} onChange={this.handleChange} value={this.state.newTaskText} />
         </header>
         <main className='tasks'>
-          {this.state.tasks.map(task => (
+          {this.props.tasks.map(task => (
               <Task data={task} deleteTask={this.removeTask} key={task.id} updateTask={this.editTask} />
           ))}
         </main>
@@ -72,4 +83,28 @@ class Board extends Component {
   }
 }
 
-export default Board;
+export default connect(
+  // mapStatetoProps
+  (state) => ({ 
+    // creamos una prop llamada task que va a contener el estado global
+    tasks: state.tasks,
+    // otras props que podrían darse
+    //isLogged: !state.token
+  }), 
+  // mapDispatchtoProps
+  // si no la creas, connect la crea por defecto
+  (dispatch) => ({
+    // NOTE opción a
+    dispatch
+    // NOTE otra opción B  
+    // addTask: (text) => { dispatch({
+    //   type: 'ADD_TODO', 
+    //   payload: {
+    //     id: Date.now(),
+    //     createAt: new Date(),
+    //     text,
+    //     completed: false,
+    //   }
+    // })}
+  }),
+)  (Board);
